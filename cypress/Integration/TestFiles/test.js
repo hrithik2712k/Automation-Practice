@@ -13,7 +13,7 @@ describe("Cypress Testing", () => {
     // Try to log in first
     login(email, password, name);
 
-    // Check if login was successful by checking if the environment variable was set
+    // Check if login was successful by checking if the environment variable was sets
     cy.then(() => {
       if (!Cypress.env("accountCreated")) {
         // Account not created yet, perform signup
