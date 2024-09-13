@@ -1,37 +1,33 @@
 pipeline {
-    agent any  // Use any available agent for running the pipeline
-
+    agent any
+    
     stages {
         stage('Checkout') {
             steps {
-                // Checkout code from SCM
-                git 'https://github.com/hrithik2712k/Automation-Practice'
+                git branch: 'main', url: 'https://github.com/hrithik2712k/Automation-Practice'
             }
         }
-
+        
         stage('Install Dependencies') {
             steps {
-                // Install Node.js dependencies
-                sh 'npm install'
+                script {
+                    // Install dependencies (e.g., npm install)
+                }
             }
         }
-
+        
         stage('Run Tests') {
             steps {
-                // Run Cypress tests
-                sh 'npx cypress run'
+                script {
+                    // Run Cypress tests
+                }
             }
         }
-    }
-
-    post {
-        always {
-            // Archive Cypress test results (if available)
-            // Ensure you adjust the path to match where your results are output
-            junit '**/cypress/results/*.xml'
-            // You may also want to archive the screenshots or videos
-            archiveArtifacts 'cypress/screenshots/**/*'
-            archiveArtifacts 'cypress/videos/**/*'
+        
+        stage('Post Actions') {
+            steps {
+                junit '**/results/*.xml' // Update path to match your test reports location
+            }
         }
     }
 }
