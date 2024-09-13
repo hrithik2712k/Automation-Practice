@@ -12,6 +12,7 @@ pipeline {
             steps {
                 script {
                     // Install dependencies (e.g., npm install)
+                    sh 'npm install'
                 }
             }
         }
@@ -20,6 +21,7 @@ pipeline {
             steps {
                 script {
                     // Run Cypress tests
+                    sh 'npx cypress run'
                 }
             }
         }
