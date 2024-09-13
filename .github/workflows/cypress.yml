@@ -24,12 +24,13 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Install Cypress
+        run: npm install cypress --save-dev
+
+      - name: Fix Cypress permissions
+        run: chmod -R 755 ./node_modules/.bin/cypress
+
       - name: Run Cypress tests
         run: npx cypress run
-
-      - name: Upload Cypress test results
-        if: failure()
-        uses: actions/upload-artifact@v3
-        with:
-          name: cypress-screenshots
-          path: cypress/screenshots
+        env:
+          CI: true
